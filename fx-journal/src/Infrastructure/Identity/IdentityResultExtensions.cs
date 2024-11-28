@@ -1,0 +1,14 @@
+﻿using fx_journal.Application.Common.Models;
+using Microsoft.AspNetCore.Identity;
+
+namespace fx_journal.Infrastructure.Identity;
+
+public static class IdentityResultExtensions
+{
+    public static Result ToApplicationResult(this IdentityResult result)
+    {
+        return result.Succeeded
+            ? Result.Success()
+            : Result.Failure(result.Errors.Select(e => e.Description));
+    }
+}
